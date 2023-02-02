@@ -36,11 +36,55 @@ class AppFixtures extends Fixture
             ->setSlug('legume');
         $manager->persist($category);
 
+        $product = new Product();
+        $product
+            ->setName('Carotte')
+            ->setSlug('carotte')
+            ->setDescription('Description carotte')
+            ->setPrice('10.00')
+            ->setImage('saucisse.jpg')
+            ->setCategory($category)
+        ;
+        $manager->persist($product);
+
+        $product = new Product();
+        $product
+            ->setName('Pomme de terre')
+            ->setSlug('pomme-de-terre')
+            ->setDescription('Description pomme de terre')
+            ->setPrice('10.00')
+            ->setImage('saucisse.jpg')
+            ->setCategory($category)
+        ;
+        $manager->persist($product);
+
         $category = new Category();
         $category
             ->setName('Fruit')
             ->setSlug('fruit');
         $manager->persist($category);
+
+        $product = new Product();
+        $product
+            ->setName('Pomme')
+            ->setSlug('pomme')
+            ->setDescription('Description pomme')
+            ->setPrice('10.00')
+            ->setImage('saucisse.jpg')
+            ->setCategory($category)
+        ;
+        $manager->persist($product);
+
+        $product = new Product();
+        $product
+            ->setName('Poire')
+            ->setSlug('poire')
+            ->setDescription('Description poire')
+            ->setPrice('10.00')
+            ->setImage('saucisse.jpg')
+            ->setCategory($category)
+        ;
+        $manager->persist($product);
 
         $manager->flush();
     }
