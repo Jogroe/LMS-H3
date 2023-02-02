@@ -24,4 +24,21 @@
             </div>
         </div>
     </nav>
+
+    {% if products is defined %}
+        <h2>Résultat de la recherche</h2>
+	<ul>
+		{% for product in products %}
+			<li>
+                <h3>{{product.name}}</h3>
+				<img style ="width: 20%;" src="{{ asset('images/' ~ product.image ) }}" alt="{{product.image}}">
+				<div>
+					<p>Le prix est de : {{product.price|format_currency('EUR', locale='fr')}}</p>
+					<a href="{{ url('product.detail',{'slug': product.slug}) }}">En savoir plus</a>
+				</div>
+			</li>
+		{% endfor %}
+	</ul> 
+    {% endif %}
+    
 {% endblock %}

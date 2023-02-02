@@ -17,7 +17,7 @@ class SearchController extends AbstractController
     }
 
     #[Route('/search', name: 'search')]
-    public function index(): Response
+    public function index(ProductRepository $productRepository): Response
     {
         $type = SearchType::class;
 
@@ -26,7 +26,10 @@ class SearchController extends AbstractController
         $form->handleRequest($this->requestStack->getCurrentRequest());
         
         if($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('search.result', ['name' => $form->getData()->getName()]);
+            $name = $this->requestStack->getCurrentRequest()->get('search')['name'];
+            $products = $productRepository->search($name);
+            
+            return $this->render('search/index.html.twig', ['form' => $form->createView(), 'products' => $products]);
         }
 
         return $this->render('search/index.html.twig', [
